@@ -920,6 +920,8 @@ public class R1 {
 		 * driver.manage().deleteCookieNamed("sessionkey");
 		 */
 		driver.get("https://rahulshettyacademy.com/angularpractice/");
+		driver.getCurrentUrl();
+		driver.getTitle();
 		File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		FileUtils.copyFile(src, new File("G:\\Screenshot.png"));
 		
