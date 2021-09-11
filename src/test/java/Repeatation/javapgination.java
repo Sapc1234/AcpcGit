@@ -39,6 +39,8 @@ public class javapgination {
 		 * driver.manage().deleteCookieNamed("sessionkey");
 		 */
 		driver.get("https://rahulshettyacademy.com/seleniumPractise/#/offers");
+		driver.getCurrentUrl();
+		driver.getTitle();
 		File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		FileUtils.copyFile(src, new File("G:\\Screenshot.png"));
 

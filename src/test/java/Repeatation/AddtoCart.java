@@ -28,6 +28,9 @@ public class AddtoCart
 
 		
 		driver.get("https://rahulshettyacademy.com/seleniumPractise/#/");
+		
+		driver.getCurrentUrl();
+		driver.getTitle();
 		Thread.sleep(3000);
 		driver.manage().window().maximize();
 

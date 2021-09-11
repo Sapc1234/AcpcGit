@@ -632,7 +632,7 @@ public class R1 {
 
 		// s1 ->is to get all the urls are tied upto the links using selenium
 		// java methos will call the urls and get the status code
-		
+
 		// if status code is >400 then that url is not working ->links which tied to the
 		// url is broken
 
@@ -760,7 +760,7 @@ public class R1 {
 
 	}
 
-	//@Test
+	// @Test
 	public void StreamCollect()
 
 	{
@@ -768,33 +768,28 @@ public class R1 {
 				.map(s -> s.toUpperCase()).collect(Collectors.toList());
 
 		System.out.println(ls.get(0));
-		
-		
+
 		// print the unique number from this array
-		
+
 		List<Integer> values = Arrays.asList(3, 2, 2, 7, 5, 1, 9, 7);
-		
-		values.stream().distinct().forEach(s->System.out.println(s));
-		
+
+		values.stream().distinct().forEach(s -> System.out.println(s));
+
 		// sort the array
-		
-		values.stream().sorted().forEach(s->System.out.println(s));
-		
+
+		values.stream().sorted().forEach(s -> System.out.println(s));
+
 		// sort the array with unique style and print the third index
 
 		List<Integer> li = values.stream().distinct().sorted().collect(Collectors.toList());
-		
-		System.out.println(li.get(3));
-		
-		
 
-		
+		System.out.println(li.get(3));
 
 	}
-	
-	//@Test
+
+	// @Test
 	public void LiveDemo() throws IOException
-	
+
 	{
 		DesiredCapabilities ch = DesiredCapabilities.chrome();
 		ch.acceptInsecureCerts();
@@ -815,57 +810,55 @@ public class R1 {
 		driver.get("https://rahulshettyacademy.com/seleniumPractise/#/offers");
 		File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		FileUtils.copyFile(src, new File("G:\\Screenshot.png"));
-		
-		//click on the column
+
+		// click on the column
 		driver.findElement(By.xpath("//tr/th[1]")).click();
-		
-		//capture all the webelement into list
-		
+
+		// capture all the webelement into list
+
 		List<WebElement> el = driver.findElements(By.xpath("//tr/td[1]"));
-		
-		//capture text of all webelements into list(original)
-		
-		List<String> ol = el.stream().map(s->s.getText()).collect(Collectors.toList());
-		
-		//sort the original list
-		
+
+		// capture text of all webelements into list(original)
+
+		List<String> ol = el.stream().map(s -> s.getText()).collect(Collectors.toList());
+
+		// sort the original list
+
 		List<String> sl = ol.stream().sorted().collect(Collectors.toList());
-		
+
 		Assert.assertTrue(ol.equals(sl));
-		
-		
+
 		List<String> price;
 		do
-			
+
 		{
 			List<WebElement> rows = driver.findElements(By.xpath("//tr/td[1]"));
-			
-		
-		 price  = rows.stream().filter(s -> s.getText().contains("Mango")).map(s -> getPriceVeggie(s))
-		.collect(Collectors.toList());
-		price.forEach(a->System.out.println(a));
-		
-		if(price.size()<1)
-			
-		{
-			driver.findElement(By.cssSelector("[aria-label='Next']")).click();
-		}
-		
-		}while(price.size()<1);
-		
-}
+
+			price = rows.stream().filter(s -> s.getText().contains("Mango")).map(s -> getPriceVeggie(s))
+					.collect(Collectors.toList());
+			price.forEach(a -> System.out.println(a));
+
+			if (price.size() < 1)
+
+			{
+				driver.findElement(By.cssSelector("[aria-label='Next']")).click();
+			}
+
+		} while (price.size() < 1);
+
+	}
 
 	private static String getPriceVeggie(WebElement s) {
 		// TODO Auto-generated method stub
-		
+
 		String pricevalue = s.findElement(By.xpath("following-sibling::td[1]")).getText();
 		return pricevalue;
 	}
-	
-	//@Test
-	
+
+	// @Test
+
 	public void Searching() throws IOException
-	
+
 	{
 
 		DesiredCapabilities ch = DesiredCapabilities.chrome();
@@ -887,21 +880,22 @@ public class R1 {
 		driver.get("https://rahulshettyacademy.com/seleniumPractise/#/offers");
 		File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		FileUtils.copyFile(src, new File("G:\\Screenshot.png"));
-		
+
 		driver.findElement(By.xpath("//input[@id='search-field']")).sendKeys("Rice");
-		
+
 		List<WebElement> veggies = driver.findElements(By.xpath("//tr/td[1]"));
-		
-		List<WebElement> filterlist = veggies.stream().filter(veggie->veggie.getText().contains("Rice")).collect(Collectors.toList());
-		
+
+		List<WebElement> filterlist = veggies.stream().filter(veggie -> veggie.getText().contains("Rice"))
+				.collect(Collectors.toList());
+
 		Assert.assertEquals(veggies.size(), filterlist.size());
-		
+
 	}
-	
+
 	@Test
-	
+
 	public void seleniumAlpha() throws IOException
-	
+
 	{
 		DesiredCapabilities ch = DesiredCapabilities.chrome();
 		ch.acceptInsecureCerts();
@@ -924,36 +918,79 @@ public class R1 {
 		driver.getTitle();
 		File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		FileUtils.copyFile(src, new File("G:\\Screenshot.png"));
-		
-		
+
 		WebElement nameEditBox = driver.findElement(By.cssSelector("[name='name']"));
 
 		System.out.println(driver.findElement(withTagName("label").above(nameEditBox)).getText());
-		
+
 		WebElement dateofBirth = driver.findElement(By.cssSelector("[for='dateofBirth']"));
-		
+
 		driver.findElement(withTagName("input").below(dateofBirth)).sendKeys("21/10/1995");
 		driver.findElement(withTagName("input").below(dateofBirth)).sendKeys("21/10/1996");
 		driver.findElement(withTagName("input").below(dateofBirth)).sendKeys("21/10/1997");
 		driver.findElement(withTagName("input").below(dateofBirth)).sendKeys("21/10/1998");
-		
-		WebElement iceCreamLabel = driver.findElement(By.xpath("//label[text()='Check me out if you Love IceCreams!']"));
-		
+
+		WebElement iceCreamLabel = driver
+				.findElement(By.xpath("//label[text()='Check me out if you Love IceCreams!']"));
+
 		driver.findElement(withTagName("input").toLeftOf(iceCreamLabel)).click();
-		
-		
-		//Get me the label of first Radio button
-		
+
+		// Get me the label of first Radio button
+
 		WebElement rb = driver.findElement(By.id("inlineRadio1"));
-		
+
 		System.out.println(driver.findElement(withTagName("label").toRightOf(rb)).getText());
-		
-		
 
+	}
 
-		
-		
-		
-		
+	@Test
+
+	public void seleniumAlpha123() throws IOException
+
+	{
+		DesiredCapabilities ch = DesiredCapabilities.chrome();
+		ch.acceptInsecureCerts();
+		ch.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
+		ch.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+		// local ChromeBrowser
+		ChromeOptions c = new ChromeOptions();
+		c.merge(ch);
+		System.setProperty("webdriver.chrome.driver", "C:\\123\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver(c);
+
+		// maximize the window
+		driver.manage().window().maximize();
+		/*
+		 * driver.manage().deleteAllCookies(); driver.manage().addCookie("asdf");
+		 * driver.manage().deleteCookieNamed("sessionkey");
+		 */
+		driver.get("https://rahulshettyacademy.com/angularpractice/");
+		driver.getCurrentUrl();
+		driver.getTitle();
+		File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		FileUtils.copyFile(src, new File("G:\\Screenshot.png"));
+
+		WebElement nameEditBox = driver.findElement(By.cssSelector("[name='name']"));
+
+		System.out.println(driver.findElement(withTagName("label").above(nameEditBox)).getText());
+
+		WebElement dateofBirth = driver.findElement(By.cssSelector("[for='dateofBirth']"));
+
+		driver.findElement(withTagName("input").below(dateofBirth)).sendKeys("21/10/1995");
+		driver.findElement(withTagName("input").below(dateofBirth)).sendKeys("21/10/1996");
+		driver.findElement(withTagName("input").below(dateofBirth)).sendKeys("21/10/1997");
+		driver.findElement(withTagName("input").below(dateofBirth)).sendKeys("21/10/1998");
+
+		WebElement iceCreamLabel = driver
+				.findElement(By.xpath("//label[text()='Check me out if you Love IceCreams!']"));
+
+		driver.findElement(withTagName("input").toLeftOf(iceCreamLabel)).click();
+
+		// Get me the label of first Radio button
+
+		WebElement rb = driver.findElement(By.id("inlineRadio1"));
+
+		System.out.println(driver.findElement(withTagName("label").toRightOf(rb)).getText());
+
 	}
 }
