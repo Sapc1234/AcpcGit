@@ -21,6 +21,9 @@ public class A1Test
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
 		driver.get("https://rahulshettyacademy.com/seleniumPractise/#/");
+		
+		driver.getCurrentUrl();
+		driver.getTitle();
 		driver.manage().window().maximize();
 
 		String[] itemsNeeded = { "Cauliflower", "Cucumber", "Beetroot" };

@@ -933,6 +933,9 @@ public class R1 {
 		WebElement dateofBirth = driver.findElement(By.cssSelector("[for='dateofBirth']"));
 		
 		driver.findElement(withTagName("input").below(dateofBirth)).sendKeys("21/10/1995");
+		driver.findElement(withTagName("input").below(dateofBirth)).sendKeys("21/10/1996");
+		driver.findElement(withTagName("input").below(dateofBirth)).sendKeys("21/10/1997");
+		driver.findElement(withTagName("input").below(dateofBirth)).sendKeys("21/10/1998");
 		
 		WebElement iceCreamLabel = driver.findElement(By.xpath("//label[text()='Check me out if you Love IceCreams!']"));
 		
