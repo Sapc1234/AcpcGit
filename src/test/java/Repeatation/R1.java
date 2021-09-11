@@ -993,4 +993,41 @@ public class R1 {
 		System.out.println(driver.findElement(withTagName("label").toRightOf(rb)).getText());
 
 	}
+	
+	 @Test
+
+		public void Searching123() throws IOException
+
+		{
+
+			DesiredCapabilities ch = DesiredCapabilities.chrome();
+			ch.acceptInsecureCerts();
+			ch.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
+			ch.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+			// local ChromeBrowser
+			ChromeOptions c = new ChromeOptions();
+			c.merge(ch);
+			System.setProperty("webdriver.chrome.driver", "C:\\123\\chromedriver.exe");
+			WebDriver driver = new ChromeDriver(c);
+
+			// maximize the window
+			driver.manage().window().maximize();
+			/*
+			 * driver.manage().deleteAllCookies(); driver.manage().addCookie("asdf");
+			 * driver.manage().deleteCookieNamed("sessionkey");
+			 */
+			driver.get("https://rahulshettyacademy.com/seleniumPractise/#/offers");
+			File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+			FileUtils.copyFile(src, new File("G:\\Screenshot.png"));
+
+			driver.findElement(By.xpath("//input[@id='search-field']")).sendKeys("Rice");
+
+			List<WebElement> veggies = driver.findElements(By.xpath("//tr/td[1]"));
+
+			List<WebElement> filterlist = veggies.stream().filter(veggie -> veggie.getText().contains("Rice"))
+					.collect(Collectors.toList());
+
+			Assert.assertEquals(veggies.size(), filterlist.size());
+
+		}
 }
