@@ -19,6 +19,8 @@ public class calender {
 		// maximize the window
 
 		driver.get("https://www.spicejet.com/");
+		driver.getCurrentUrl();
+		driver.getTitle();
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
